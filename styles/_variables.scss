@@ -1,0 +1,31 @@
+@use 'helpers' as *;
+
+:root {
+  --color-light: #FFFFFF;
+
+  --color-dark: #141414;
+  --color-dark10: #A1A1A1;
+  --color-dark15: #262626;
+  --color-dark20: #333333;
+  --color-dark40: #666666;
+
+  --color-gray50: #7E7E81;
+  --color-gray60: #98989A;
+
+  --color-acent: #FFD11A;
+  --color-red: #FF5500;
+
+  --font-family-base: 'Inter', sans-serif;
+  --font-family-accent: 'Kumbh Sans', sans-serif;
+
+  --container-width: #{rem(1600)};
+  --container-padding-x: #{rem(20)};
+
+  --transition-duration: 0.2s;
+}
+
+@include laptop {
+  :root {
+    --container-width: #{rem(1280)};
+  }
+}
