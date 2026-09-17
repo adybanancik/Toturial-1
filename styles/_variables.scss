@@ -1,19 +1,21 @@
 @use 'helpers' as *;
 
 :root {
-  --color-light: #FFFFFF;
+  --color-light: #ffffff;
 
   --color-dark: #141414;
-  --color-dark10: #A1A1A1;
+  --color-dark10: #a1a1a1;
   --color-dark15: #262626;
   --color-dark20: #333333;
   --color-dark40: #666666;
 
-  --color-gray50: #7E7E81;
-  --color-gray60: #98989A;
+  --color-gray50: #7e7e81;
+  --color-gray60: #98989a;
 
-  --color-acent: #FFD11A;
-  --color-red: #FF5500;
+  --color-acent: #ffd11a;
+  --color-red: #ff5500;
+
+  --border: #{rem(1)} solid var(--color-dark-15);
 
   --font-family-base: 'Inter', sans-serif;
   --font-family-accent: 'Kumbh Sans', sans-serif;
