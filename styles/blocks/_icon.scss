@@ -15,6 +15,14 @@
     background-position: center;
     background-size: container;
     background-repeat: no-repeat;
+
+   @include laptop{
+    --size: #{rem(20)};
+   }
+
+
+
+
   }
 
   &--yellow-arrow {
