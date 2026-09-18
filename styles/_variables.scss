@@ -4,16 +4,18 @@
   --color-light: #ffffff;
 
   --color-dark: #141414;
-  --color-dark10: #a1a1a1;
-  --color-dark15: #262626;
-  --color-dark20: #333333;
-  --color-dark40: #666666;
+  --color-dark-10: #1a1a1a;
+  --color-dark-15: #262626;
+  --color-dark-20: #333333;
+  --color-dark-40: #666666;
 
-  --color-gray50: #7e7e81;
-  --color-gray60: #98989a;
+  --color-gray-50: #7e7e81;
+  --color-gray-60: #98989a;
 
-  --color-acent: #ffd11a;
+  --color-accent: #ffd11a;
   --color-red: #ff5500;
+
+  --gradient: linear-gradient(45deg, var(--color-dark-15) 64%, var(--color-accent) 136%);
 
   --border: #{rem(1)} solid var(--color-dark-15);
 
@@ -24,10 +26,8 @@
   --container-padding-x: #{rem(20)};
 
   --transition-duration: 0.2s;
-}
 
-@include laptop {
-  :root {
+  @include laptop {
     --container-width: #{rem(1280)};
   }
 }
