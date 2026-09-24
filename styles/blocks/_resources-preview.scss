@@ -20,6 +20,12 @@
     }
 
   }
+
+  &__button {
+    @include mobile-s {
+      width: 100%;
+    }
+  }
 }
 
 

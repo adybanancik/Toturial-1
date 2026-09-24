@@ -754,6 +754,12 @@ button[aria-label]::before {
     padding: 1.875rem 2.5rem;
   }
 }
+@media (width <= 63.99875rem) {
+  .metrics__item {
+    row-gap: 0;
+    padding: 1.25rem;
+  }
+}
 .metrics__item:first-child {
   padding-left: 0;
 }
@@ -777,6 +783,12 @@ button[aria-label]::before {
 @media (width <= 90.06125rem) {
   .team {
     --personImageSize: 3.125rem;
+    padding: 0.5rem;
+  }
+}
+@media (width <= 63.99875rem) {
+  .team {
+    --personImageSize: 2.5rem;
     padding: 0.5rem;
   }
 }
@@ -816,6 +828,11 @@ button[aria-label]::before {
     row-gap: 0.375rem;
   }
 }
+@media (width <= 30.06125rem) {
+  .resources-preview__button {
+    width: 100%;
+  }
+}
 
 .advantage-card {
   display: grid;
@@ -826,9 +843,19 @@ button[aria-label]::before {
     row-gap: 1.25rem;
   }
 }
+@media (width <= 47.99875rem) {
+  .advantage-card {
+    row-gap: 0.875rem;
+  }
+}
 @media (width <= 90.06125rem) {
   .advantage-card__image {
     width: 2.5rem;
+  }
+}
+@media (width <= 47.99875rem) {
+  .advantage-card__image {
+    width: 1.875rem;
   }
 }
 .advantage-card__link {
@@ -844,6 +871,11 @@ button[aria-label]::before {
     --circleSize: 2.75rem;
     --circleMarginLeft: 0.875rem;
     row-gap: 0.125rem;
+  }
+}
+@media (width <= 47.99875rem) {
+  .advantage-card__link {
+    --circleSize: 2.5rem;
   }
 }
 .advantage-card__link::after {
@@ -919,6 +951,17 @@ button[aria-label]::before {
   grid-area: metrics;
   border-top: var(--border);
 }
+@media (width > 63.99875rem) {
+  .hero__metrics {
+    border-top: var(--border);
+  }
+}
+@media (width <= 63.99875rem) {
+  .hero__metrics::before {
+    width: 100vw;
+    right: calc(var(--container-padding-x) * -1);
+  }
+}
 .hero__resources-preview {
   grid-area: resources-preview;
   padding-left: 5rem;
@@ -932,12 +975,26 @@ button[aria-label]::before {
     padding-bottom: 3.125rem;
   }
 }
+@media (width > 63.99875rem) {
+  .hero__resources-preview {
+    border-left: var(--border);
+  }
+}
+.hero__resources-preview include tablet {
+  width: 100vw;
+  margin-left: calc(var(--container-padding-x) * -1);
+  padding: 6.25rem 2.5rem 2.5rem;
+  background-image: url("../../images/resources-preview/bg_tablet.png.png");
+  background-size: contain;
+}
 .hero__advantages {
   border-block: var(--border);
 }
-.hero__advantages-list {
-  display: flex;
-  grid-template-columns: repeat(3, 1fr);
+@media (width > 63.99875rem) {
+  .hero__advantages-list {
+    display: flex;
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 .hero__advantages-item {
   --paddingX: 5rem;
@@ -949,12 +1006,22 @@ button[aria-label]::before {
     padding-block: 2.5rem;
   }
 }
-.hero__advantages-item:not(:first-child) {
-  padding-left: var(--paddingX);
+@media (width > 63.99875rem) {
+  .hero__advantages-item:not(:first-child) {
+    padding-left: var(--paddingX);
+  }
+  .hero__advantages-item:not(:last-child) {
+    padding-right: var(--paddingX);
+    border-right: var(--border);
+  }
 }
-.hero__advantages-item:not(:last-child) {
-  padding-right: var(--paddingX);
-  border-right: var(--border);
+@media (width <= 63.99875rem) {
+  .hero__advantages-item {
+    padding-block: 1.875rem;
+  }
+  .hero__advantages-item:not(:last-child) {
+    border-bottom: var(--border);
+  }
 }
 
 .header,
