@@ -3,7 +3,6 @@
 @use 'variables';
 @use 'utils';
 @use 'globals';
-
 @use 'blocks/icon';
 @use 'blocks/logo';
 @use 'blocks/button';
@@ -15,12 +14,15 @@
 @use 'blocks/resources-preview';
 @use 'blocks/advantage-card';
 @use 'blocks/hero';
-
 @use 'blocks/tag';
 @use 'blocks/section';
 @use 'blocks/list';
 @use 'blocks/tile';
 @use 'blocks/card';
+@use 'blocks/tabs';
+@use 'blocks/person-card';
+@use 'blocks/blog-actions';
+@use 'blocks/blog-card';
 
 .header,
 main > *not(:last-child),
