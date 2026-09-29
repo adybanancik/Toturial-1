@@ -43,7 +43,7 @@
 
     &-info {
       display: grid;
-      row-gap: fluid(16, 6)
+      row-gap: fluid(16, 6);
     }
 
   }
@@ -52,7 +52,7 @@
     padding-right: 0;
 
     @include tablet {
-      padding: rem(30) rem(16);
+      padding: rem(30) 0;
     }
 
     &__grid {

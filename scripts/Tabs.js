@@ -1,8 +1,6 @@
-const rootSelector = '[data-js-tabs]'
-
 class Tabs {
     selectors = {
-        root: rootSelector,
+        root: '[data-js-tabs]',
         button: '[data-js-tabs-button]',
         content: '[data-js-tabs-content]',
     }
@@ -20,30 +18,49 @@ class Tabs {
         this.rootElement = rootElement
         this.buttonElements = this.rootElement.querySelectorAll(this.selectors.button)
         this.contentElements = this.rootElement.querySelectorAll(this.selectors.content)
-        this.state = {
-            activeTabIndex:
-                [...this.buttonElements]
-                    .findIndex((buttonElement) => buttonElement.classlist.contains(this.stateClasses.isActive))
-        }
-        this.limitTabsIndex = this.buttonElements.length - 1
+
+        this.state = this.getProxyState({
+            activeTabIndex: [...this.buttonElements]
+                .findIndex((buttonElement) =>
+                    buttonElement.classList.contains(this.stateClasses.isActive)
+                ),
+        })
+
         this.bindEvents()
     }
 
+    getProxyState(initialState) {
+        return new Proxy(initialState, {
+            get: (target, prop) => {
+                return target[prop]
+            },
+            set: (target, prop, value) => {
+                target[prop] = value
+
+                this.updateUI()
+
+                return true
+            },
+        })
+    }
+
     updateUI() {
-        const { activeTabIndex} = this.state
+        const { activeTabIndex } = this.state
 
         this.buttonElements.forEach((buttonElement, index) => {
-            const isActive =  index === activeTabIndex
+            const isActive = index === activeTabIndex
 
             buttonElement.classList.toggle(this.stateClasses.isActive, isActive)
-            buttonElement.setAttribute(this.stateAttributes.ariaSelected, isActive.toString())
-            buttonElement.setAttribute(this.stateAttributes.tabIndex, isActive ? '0' : '-1')
-        })
+            buttonElement.setAttribute(this.stateAttributes.ariaSelected, isActive)
+            buttonElement.setAttribute(
+                this.stateAttributes.tabIndex,
+                isActive ? '0' : '-1'
+            )
 
-        this.contentElements.forEach((contentElement, index) => {
-            const isActive =  index === activeTabIndex
-
-            contentElement.classList.toggle(this.stateClasses.isActive, isActive)
+            this.contentElements[index].classList.toggle(
+                this.stateClasses.isActive,
+                isActive
+            )
         })
     }
 
@@ -53,19 +70,21 @@ class Tabs {
     }
 
     previousTab = () => {
-       const newTabIndex = this.state.activeTabIndex === 0
-        ? this.limitTabsIndex
-        : this.state.activeTabIndex -1
+        const newTabIndex =
+            this.state.activeTabIndex === 0
+                ? this.buttonElements.length - 1
+                : this.state.activeTabIndex - 1
 
-      this.activeTab(newTabIndex)
+        this.activateTab(newTabIndex)
     }
 
     nextTab = () => {
-        const newTabIndex = this.state.activeTabIndex === this.limitTabsIndex
-         ? 0
-         : this.state.activeTabIndex + 1
+        const newTabIndex =
+            this.state.activeTabIndex === this.buttonElements.length - 1
+                ? 0
+                : this.state.activeTabIndex + 1
 
-        this.activeTab(newTabIndex)
+        this.activateTab(newTabIndex)
     }
 
     firstTab = () => {
@@ -73,60 +92,47 @@ class Tabs {
     }
 
     lastTab = () => {
-        this.activateTab(this.limitTabsIndex)
+        this.activateTab(this.buttonElements.length - 1)
     }
 
-    onButtonClick(buttonIndex) {
-        this.state.activeTabIndex = buttonIndex
-        this.updateUI()
-
+    onButtonClick(index) {
+        this.activateTab(index)
     }
 
     onKeyDown = (event) => {
-        const { code, metaKey } = event
+        const { code } = event
 
         const action = {
-            arrowLeft: this.previousTab,
-            arrowRight: this.nextTab,
+            ArrowLeft: this.previousTab,
+            ArrowRight: this.nextTab,
             Home: this.firstTab,
             End: this.lastTab,
-        } [code]
+        }[code]
 
-        const isMacHomeKey = metaKey && code === 'ArrowLeft'
-        if (isMacHomeKey) {
-            this.firstTab ()
-            this.updateUI()
-            return
+        if (action) {
+            event.preventDefault()
+            action()
         }
-
-        const isMacEndKey = metaKey && code === 'ArrowRight'
-        if (isMacHomeKey) {
-            this.lastTab ()
-            this.updateUI()
-            return
-        }
-
-        action?.()
-        this.updateUI()
     }
 
     bindEvents() {
         this.buttonElements.forEach((buttonElement, index) => {
-          buttonElement.buttonElements('click', () => this.onButtonClick(index))
+            buttonElement.addEventListener('click', () => this.onButtonClick(index))
         })
-        this.rootElement.addEventListner('keydown', this.onKeyDown)
+
+        this.rootElement.addEventListener('keydown', this.onKeyDown)
     }
 }
 
 class TabsCollection {
-    constructor () {
-      this.init ()
+    constructor() {
+        this.init()
     }
 
-    init () {
-      document.querySelectorAll (rootSelector).forEach((element) => {
-        new Tabs(element)
-      })
+    init() {
+        document.querySelectorAll('[data-js-tabs]').forEach((element) => {
+            new Tabs(element)
+        })
     }
 }
 
