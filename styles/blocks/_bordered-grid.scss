@@ -48,6 +48,8 @@
     --columns: 3;
     --itemPaddingX: #{rem(50)};
 
+    column-gap: calc(var(--itemPaddingX) * 2);
+
     @include laptop {
       --itemPaddingX: #{rem(40)};
     }
